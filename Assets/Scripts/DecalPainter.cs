@@ -8,7 +8,6 @@ using Object = UnityEngine.Object;
 public class DecalPainter : IDisposable
 {
 	const string SHADER_NAME = "DecalMapping";
-	const int SIZE = 2048;
 	static readonly int _decalTextureNameID = Shader.PropertyToID("_DecalTexture");
 	static readonly int _accumulateTextureNameID = Shader.PropertyToID("_AccumulateTexture");
 	static readonly int _decalPositionOSNameID = Shader.PropertyToID("_DecalPositionOS");
@@ -23,14 +22,14 @@ public class DecalPainter : IDisposable
 	Mesh _targetMesh;
 
 
-	public DecalPainter(MeshFilter targetMeshFilter)
+	public DecalPainter(MeshFilter targetMeshFilter, int textureSize = 2048)
 	{
 		// 転写に使う情報。強制したいのでMeshFilterでもらい、Meshのコピーを複製。
 		_targetMesh = targetMeshFilter.mesh;
 
 		// 累積テクスチャ
-		texture = new Texture2D(SIZE, SIZE, TextureFormat.RGBA32, false);
-		var pixels = new Color[SIZE * SIZE];
+		texture = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, false);
+		var pixels = new Color[textureSize * textureSize];
 		for (int i = 0; i < pixels.Length; ++i) { pixels[i] = Color.clear; }
 		texture.SetPixels(pixels);
 		texture.Apply();
