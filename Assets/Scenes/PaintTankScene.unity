@@ -544,6 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 874562399}
   - component: {fileID: 874562400}
+  - component: {fileID: 874562402}
   m_Layer: 0
   m_Name: PaintTank
   m_TagString: Untagged
@@ -579,6 +580,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a1aab8cafafbd4a9b37d450d50dc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _acceleration: 24
+  _maxLinearVelocity: 5
+  _rotateSpeed: 70
+  _maxAngularVelocity: 4
+  _rigidbody: {fileID: 874562402}
+--- !u!54 &874562402
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874562398}
+  serializedVersion: 4
+  m_Mass: 30
+  m_Drag: 0
+  m_AngularDrag: 0.001
+  m_CenterOfMass: {x: 0, y: 0.1, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1 &917430414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 951636146637939270, guid: 7d79b8ce1b311d4439d1a29048a34a71,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121305364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &917430418
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917430414}
+  m_Material: {fileID: 13400000, guid: 452df776624e5904a9b3137652c17d7b, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8090201
+  m_Height: 4.584601
+  m_Direction: 1
+  m_Center: {x: -0.0000002682209, y: 1.4832811, z: -0.00000023841852}
 --- !u!1 &945740604
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +676,34 @@ Transform:
   - {fileID: 1245956971}
   m_Father: {fileID: 1042278845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &948350402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9215042916403461548, guid: 7d79b8ce1b311d4439d1a29048a34a71,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121305364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &948350406
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948350402}
+  m_Material: {fileID: 13400000, guid: 2eba6e16e91a6244997d67e3f12db9da, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1973893103929547111, guid: 7d79b8ce1b311d4439d1a29048a34a71, type: 3}
 --- !u!1 &1042278843
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +926,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7d79b8ce1b311d4439d1a29048a34a71,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.16020131
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d79b8ce1b311d4439d1a29048a34a71,
         type: 3}
@@ -846,7 +936,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7d79b8ce1b311d4439d1a29048a34a71,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.36805534
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d79b8ce1b311d4439d1a29048a34a71,
         type: 3}
@@ -906,7 +996,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -9215042916403461548, guid: 7d79b8ce1b311d4439d1a29048a34a71,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 948350406}
+    - targetCorrespondingSourceObject: {fileID: 951636146637939270, guid: 7d79b8ce1b311d4439d1a29048a34a71,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 917430418}
   m_SourcePrefab: {fileID: 100100000, guid: 7d79b8ce1b311d4439d1a29048a34a71, type: 3}
 --- !u!4 &2121305365 stripped
 Transform:
