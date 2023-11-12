@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
 	bool _initialized;
 	bool _isFired;
 	float _elapsedTime;
+	float _size = 1f;
 
 
 
@@ -35,6 +36,12 @@ public class Bullet : MonoBehaviour
 	public Bullet SetPosition(Vector3 position)
 	{
 		transform.position = position;
+		return this;
+	}
+
+	public Bullet SetPaintSize(float size)
+	{
+		_size = size;
 		return this;
 	}
 
@@ -71,5 +78,26 @@ public class Bullet : MonoBehaviour
 		if (!_initialized) { return; }
 		if (_elapsedTime < 0.1f) { return; }
 		Hit();
+
+		if (other.contactCount > 0 && other.gameObject.TryGetComponent(out Paintable paintable))
+		{
+			var normal = other.contacts[0].normal;
+			var tangent = Vector3.Cross(normal, Vector3.right).normalized;
+			var hitPosition = other.contacts[0].point;
+			paintable.Paint(
+				worldPosition: hitPosition,
+				normal: normal,
+				tangent: tangent,
+				size: _size,
+				color: _renderer.sharedMaterial.color
+			);
+
+			// Debug確認用Plane作成
+			/*var plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+			plane.transform.position = hitPosition + normal;
+			plane.transform.rotation = Quaternion.LookRotation(Vector3.Cross(normal, tangent).normalized, normal);
+			plane.transform.localScale = Vector3.one * (_size * 0.25f);
+			Destroy(plane.GetComponent<Collider>());*/
+		}
 	}
 }

@@ -10,6 +10,8 @@ public class PaintTank : MonoBehaviour
 	[SerializeField] float _turretRotateSpeed = 30f;
 	[SerializeField] Color _initializePaintColor = Color.red;
 	[SerializeField] float _bulletSpeed = 10f;
+	[SerializeField] float _paintMinSize = 1.0f;
+	[SerializeField] float _paintMaxSize = 1.5f;
 
 	[Header("Components")]
 	[SerializeField] Rigidbody _rigidbody;
@@ -63,6 +65,7 @@ public class PaintTank : MonoBehaviour
 		bullet.Initialize()
 			.SetMaterial(_bulletMaterial)
 			.SetPosition(_muzzle.position)
+			.SetPaintSize(Random.Range(_paintMinSize, _paintMaxSize))
 			.Fire(_muzzle.forward, _bulletSpeed);
 	}
 
@@ -80,7 +83,7 @@ public class PaintTank : MonoBehaviour
 		var acceleration = dv / dt;
 		var force = _rigidbody.mass * acceleration;
 		_rigidbody.AddForce(force * _transform.forward, ForceMode.Force);
-		
+
 		var rotatePower = _moveDirection.x;
 		var angularVelocity = rotatePower * _rotateSpeed * _transform.up;
 		var id = _rigidbody.inertiaTensor;

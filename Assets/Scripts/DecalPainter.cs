@@ -30,7 +30,7 @@ public class DecalPainter : IDisposable
 		// 累積テクスチャ
 		texture = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, false);
 		var pixels = new Color[textureSize * textureSize];
-		for (int i = 0; i < pixels.Length; ++i) { pixels[i] = Color.clear; }
+		for (int i = 0; i < pixels.Length; ++i) { pixels[i] = Color.white; }
 		texture.SetPixels(pixels);
 		texture.Apply();
 
@@ -78,6 +78,7 @@ public class DecalPainter : IDisposable
 	/// </summary>
 	public void BakeBaseTexture(Texture source)
 	{
+		if (source == null) { return; }
 		var src = source;
 		var dst = texture;
 
