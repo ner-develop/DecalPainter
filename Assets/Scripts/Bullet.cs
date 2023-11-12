@@ -53,14 +53,25 @@ public class Bullet : MonoBehaviour
 		_elapsedTime = 0f;
 	}
 
-	void Hit()
+	void Hit(Paintable paintable, ContactPoint contactPoint)
 	{
+		var normal = contactPoint.normal;
+		var tangent = Vector3.Cross(normal, Vector3.right).normalized;
+		var hitPosition = contactPoint.point;
+		paintable.Paint(
+			worldPosition: hitPosition,
+			normal: normal,
+			tangent: tangent,
+			size: _size,
+			color: _renderer.sharedMaterial.color
+		);
+
 		if (_fxPrefab != null)
 		{
 			var fx = Instantiate(_fxPrefab);
 			fx.Initialize()
 				.SetColor(_renderer.sharedMaterial.color)
-				.Play(transform.position, transform.up);
+				.Play(transform.position, normal);
 		}
 
 		Destroy(gameObject);
@@ -76,21 +87,11 @@ public class Bullet : MonoBehaviour
 	void OnCollisionEnter(Collision other)
 	{
 		if (!_initialized) { return; }
-		if (_elapsedTime < 0.1f) { return; }
-		Hit();
+		if (_elapsedTime < 0.05f) { return; }
 
 		if (other.contactCount > 0 && other.gameObject.TryGetComponent(out Paintable paintable))
 		{
-			var normal = other.contacts[0].normal;
-			var tangent = Vector3.Cross(normal, Vector3.right).normalized;
-			var hitPosition = other.contacts[0].point;
-			paintable.Paint(
-				worldPosition: hitPosition,
-				normal: normal,
-				tangent: tangent,
-				size: _size,
-				color: _renderer.sharedMaterial.color
-			);
+			Hit(paintable, other.GetContact(0));
 
 			// Debug確認用Plane作成
 			/*var plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
