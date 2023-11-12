@@ -5,6 +5,9 @@ public class Bullet : MonoBehaviour
 	[SerializeField] Renderer _renderer;
 	[SerializeField] Rigidbody _rigidbody;
 
+	[Header("Prefabs")]
+	[SerializeField] Fx _fxPrefab;
+
 	bool _initialized;
 	bool _isFired;
 	float _elapsedTime;
@@ -45,6 +48,14 @@ public class Bullet : MonoBehaviour
 
 	void Hit()
 	{
+		if (_fxPrefab != null)
+		{
+			var fx = Instantiate(_fxPrefab);
+			fx.Initialize()
+				.SetColor(_renderer.sharedMaterial.color)
+				.Play(transform.position, transform.up);
+		}
+
 		Destroy(gameObject);
 	}
 

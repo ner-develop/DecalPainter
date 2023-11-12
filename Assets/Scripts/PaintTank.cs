@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PaintTank : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PaintTank : MonoBehaviour
 	[SerializeField] float _rotateSpeed = 1f;
 	[SerializeField] float _maxAngularVelocity = 1f;
 	[SerializeField] float _turretRotateSpeed = 30f;
-	[SerializeField] Color _paintColor = Color.red;
+	[SerializeField] Color _initializePaintColor = Color.red;
 	[SerializeField] float _bulletSpeed = 10f;
 
 	[Header("Components")]
@@ -38,7 +39,7 @@ public class PaintTank : MonoBehaviour
 
 		if (_bulletPrefab != null)
 		{
-			_bulletMaterial = new Material(_bulletPrefab.GetMaterial()) { color = _paintColor };
+			_bulletMaterial = new Material(_bulletPrefab.GetMaterial()) { color = _initializePaintColor };
 		}
 	}
 

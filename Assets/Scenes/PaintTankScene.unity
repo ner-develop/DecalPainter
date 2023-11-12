@@ -748,7 +748,7 @@ MonoBehaviour:
   _rotateSpeed: 64
   _maxAngularVelocity: 2
   _turretRotateSpeed: 30
-  _paintColor: {r: 1, g: 0, b: 0, a: 1}
+  _initializePaintColor: {r: 1, g: 0, b: 0, a: 1}
   _bulletSpeed: 10
   _rigidbody: {fileID: 874562402}
   _turret: {fileID: 917430419}
