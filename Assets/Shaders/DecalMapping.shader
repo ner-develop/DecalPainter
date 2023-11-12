@@ -106,7 +106,7 @@ Shader "DecalMapping"
 				
 				// 2. 平面に投影した座標を、平面のUV座標に変換する
 				const half2 unclampedUv = (positionOnPlane / _DecalSize) + 0.5; // 0~1空間に正規化するが、範囲外の場合もあるのでClampしない。0~1なら平面内。
-				const half sameDirectionMask = step(0, dot(normal, decalNormal)); // Decalと同じ向きなら1, 逆なら0
+				const half sameDirectionMask = step(0.2, dot(normal, decalNormal)); // Decalと同じ向きなら1, 逆なら0
 				const half decalAreaMask = int(0 <= unclampedUv.x && unclampedUv.x <= 1 && 0 <= unclampedUv.y && unclampedUv.y <= 1); // 平面内なら1, 平面外なら0 
 				const half2 uv = unclampedUv * sameDirectionMask * decalAreaMask;
 				//return half4(uv.xy, 0, 1);
