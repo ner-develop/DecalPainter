@@ -7,14 +7,19 @@ public class PaintTank : MonoBehaviour
 	[SerializeField] float _maxLinearVelocity = 1f;
 	[SerializeField] float _rotateSpeed = 1f;
 	[SerializeField] float _maxAngularVelocity = 1f;
+	[SerializeField] float _turretRotateSpeed = 30f;
 
 	[Header("Components")]
 	[SerializeField] Rigidbody _rigidbody;
+	[SerializeField] Transform _turret;
 
 
 	bool _initialized;
 	Transform _transform;
 	Vector3 _moveDirection;
+	Quaternion _initialTurretRotation;
+	float _turretAngle;
+	int _turretRotateDirection;
 
 	public void Initialize()
 	{
@@ -22,11 +27,22 @@ public class PaintTank : MonoBehaviour
 
 		_initialized = true;
 		_transform = transform;
+		_initialTurretRotation = _turret.localRotation;
 	}
 
 	public void Move(Vector3 direction)
 	{
 		_moveDirection = (_moveDirection + direction.normalized).normalized;
+	}
+
+	public void RotateTurretUpward()
+	{
+		_turretRotateDirection = 1;
+	}
+
+	public void RotateTurretDownward()
+	{
+		_turretRotateDirection = -1;
 	}
 
 	void UpdateManually(float dt)
@@ -52,7 +68,11 @@ public class PaintTank : MonoBehaviour
 		var torque = ir * Vector3.Scale(id, iri * angularVelocity);
 		_rigidbody.AddTorque(torque, ForceMode.Force);
 
+		_turretAngle = Mathf.Clamp(_turretAngle + _turretRotateDirection * _turretRotateSpeed * dt, 0, 70f);
+		_turret.localRotation = _initialTurretRotation * Quaternion.AngleAxis(_turretAngle, Vector3.right);
+
 		_moveDirection = Vector3.zero;
+		_turretRotateDirection = 0;
 	}
 
 
@@ -78,6 +98,14 @@ public class PaintTank : MonoBehaviour
 		if (Input.GetKey(KeyCode.D))
 		{
 			Move(Vector3.right);
+		}
+		if (Input.GetKey(KeyCode.UpArrow))
+		{
+			RotateTurretUpward();
+		}
+		if (Input.GetKey(KeyCode.DownArrow))
+		{
+			RotateTurretDownward();
 		}
 		UpdateManually(Time.deltaTime);
 	}

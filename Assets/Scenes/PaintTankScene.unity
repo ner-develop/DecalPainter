@@ -716,7 +716,9 @@ MonoBehaviour:
   _maxLinearVelocity: 4
   _rotateSpeed: 64
   _maxAngularVelocity: 2
+  _turretRotateSpeed: 30
   _rigidbody: {fileID: 874562402}
+  _turret: {fileID: 917430419}
 --- !u!54 &874562402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -773,6 +775,12 @@ CapsuleCollider:
   m_Height: 4.584601
   m_Direction: 1
   m_Center: {x: -0.0000002682209, y: 1.4832811, z: -0.00000023841852}
+--- !u!4 &917430419 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7940306847455457151, guid: 7d79b8ce1b311d4439d1a29048a34a71,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121305364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &945740604
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +887,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
+  - {fileID: 1233456627}
   - {fileID: 708805581}
   - {fileID: 945740605}
   - {fileID: 874562399}
@@ -948,13 +957,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233456625}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2066352, y: 0, z: 0, w: 0.9784181}
+  m_LocalRotation: {x: 0.2066352, y: -0, z: -0, w: 0.9784181}
   m_LocalPosition: {x: 0, y: 1.22, z: -1.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 485022576}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1042278845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1245956970
 PrefabInstance:
@@ -1295,4 +1304,3 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1042278845}
-  - {fileID: 1233456627}
