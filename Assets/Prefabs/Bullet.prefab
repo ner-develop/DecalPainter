@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 5061640272854319438}
   _rigidbody: {fileID: 4522200452211419251}
-  _fxPrefab: {fileID: -4461108012069351305, guid: edfad3fb0b96ba243b2fdacac2ea0378,
+  _fxPrefab: {fileID: 7830119616246912053, guid: edfad3fb0b96ba243b2fdacac2ea0378,
     type: 3}
 --- !u!54 &4522200452211419251
 Rigidbody:
