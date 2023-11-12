@@ -47,13 +47,14 @@ public class MeshPaintTester : MonoBehaviour
 
 			// ペイント情報をセットアップ
 			var targetMeshTransform = _targetMesh.transform;
-			var size = decalPlaneTransform.localScale.x / 0.25f * 2f; //標準Planeのサイズに合わせたハードコード
+			var size = 1;
 			_decalPainter.SetPointer(
 				paintPositionOnObjectSpace: targetMeshTransform.InverseTransformPoint(decalPlaneTransform.position),
 				normal: targetMeshTransform.InverseTransformDirection(decalPlaneTransform.up),
 				tangent: targetMeshTransform.InverseTransformDirection(decalPlaneTransform.right),
 				decalSize: size,
-				color: Color.white
+				color: Color.white,
+				transformScale: targetMeshTransform.lossyScale
 			);
 
 			// 累積描画

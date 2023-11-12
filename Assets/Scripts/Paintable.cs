@@ -53,13 +53,13 @@ public class Paintable : MonoBehaviour
 		var positionOS = transform.InverseTransformPoint(worldPosition);
 		var normalOS = transform.InverseTransformDirection(normal);
 		var tangentOS = transform.InverseTransformDirection(tangent);
-		var sizeOS = size / transform.lossyScale.x; //TODO: 厳密じゃない
 		_decalPainter.SetPointer(
 			paintPositionOnObjectSpace: positionOS,
 			normal: normalOS,
 			tangent: tangentOS,
-			decalSize: sizeOS,
-			color: color
+			decalSize: size,
+			color: color,
+			transformScale: transform.lossyScale
 		);
 		_decalPainter.Paint();
 	}

@@ -14,8 +14,10 @@ Shader "DecalMapping"
 		_DecalNormal("Decal Normal", Vector) = (0, 1, 0, 0)
 		_DecalTangent("Decal Tangent", Vector) = (1, 0, 0, 0)
 		_Color("Color", Color) = (0, 0, 0, 0)
+		// オブジェクト情報
+		_ObjectScale("Object Scale", Vector) = (1, 1, 1, 1)
 	}
-	
+
 	SubShader
 	{
 		Tags{"RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True"}
@@ -37,6 +39,7 @@ Shader "DecalMapping"
 		float3 _DecalNormal;
 		float3 _DecalTangent;
 		float4 _Color;
+		float3 _ObjectScale;
 		CBUFFER_END
 		ENDHLSL
 
@@ -96,7 +99,7 @@ Shader "DecalMapping"
 				
 				// 1. 平面上に描画座標をマップする。
 				// 平面から描画座標のベクトルを求め、平面への正射影ベクトルを求める(=平面に投影した座標)
-				const half3 decalCenterToPositionVector = input.positionOS - _DecalPositionOS;
+				const half3 decalCenterToPositionVector = (input.positionOS - _DecalPositionOS) * _ObjectScale;
 				const float2 positionOnPlane = float2(dot(decalTangent, decalCenterToPositionVector), dot(decalBitangent, decalCenterToPositionVector));
 				//return half4(x,y,0,1);
 				

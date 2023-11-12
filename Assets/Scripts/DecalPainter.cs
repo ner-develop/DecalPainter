@@ -15,6 +15,7 @@ public class DecalPainter : IDisposable
 	static readonly int _decalNormalNameID = Shader.PropertyToID("_DecalNormal");
 	static readonly int _decalTangentNameID = Shader.PropertyToID("_DecalTangent");
 	static readonly int _colorNameID = Shader.PropertyToID("_Color");
+	static readonly int _objectScaleNameID = Shader.PropertyToID("_ObjectScale");
 
 	public Texture2D texture { get; private set; }
 	public Material mappingMaterial { get; private set; }
@@ -107,7 +108,8 @@ public class DecalPainter : IDisposable
 		Vector3 normal,
 		Vector3 tangent,
 		float decalSize,
-		Color color
+		Color color,
+		Vector3 transformScale
 	)
 	{
 		mappingMaterial.SetVector(_decalPositionOSNameID, paintPositionOnObjectSpace);
@@ -115,6 +117,7 @@ public class DecalPainter : IDisposable
 		mappingMaterial.SetVector(_decalNormalNameID, normal.normalized);
 		mappingMaterial.SetVector(_decalTangentNameID, tangent.normalized);
 		mappingMaterial.SetColor(_colorNameID, color);
+		mappingMaterial.SetVector(_objectScaleNameID, transformScale);
 	}
 
 	/// <summary>
