@@ -58,6 +58,12 @@ public class Bullet : MonoBehaviour
 		var normal = contactPoint.normal;
 		var tangent = Vector3.Cross(normal, Vector3.right).normalized;
 		var hitPosition = contactPoint.point;
+
+		if (tangent.sqrMagnitude < 0.01f)
+		{
+			tangent = Vector3.Cross(normal, Vector3.forward).normalized;
+		}
+
 		paintable.Paint(
 			worldPosition: hitPosition,
 			normal: normal,
