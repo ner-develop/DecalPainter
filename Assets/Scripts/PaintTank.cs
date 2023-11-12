@@ -8,10 +8,16 @@ public class PaintTank : MonoBehaviour
 	[SerializeField] float _rotateSpeed = 1f;
 	[SerializeField] float _maxAngularVelocity = 1f;
 	[SerializeField] float _turretRotateSpeed = 30f;
+	[SerializeField] Color _paintColor = Color.red;
+	[SerializeField] float _bulletSpeed = 10f;
 
 	[Header("Components")]
 	[SerializeField] Rigidbody _rigidbody;
 	[SerializeField] Transform _turret;
+	[SerializeField] Transform _muzzle;
+
+	[Header("Prefabs")]
+	[SerializeField] Bullet _bulletPrefab;
 
 
 	bool _initialized;
@@ -20,6 +26,7 @@ public class PaintTank : MonoBehaviour
 	Quaternion _initialTurretRotation;
 	float _turretAngle;
 	int _turretRotateDirection;
+	Material _bulletMaterial;
 
 	public void Initialize()
 	{
@@ -28,6 +35,11 @@ public class PaintTank : MonoBehaviour
 		_initialized = true;
 		_transform = transform;
 		_initialTurretRotation = _turret.localRotation;
+
+		if (_bulletPrefab != null)
+		{
+			_bulletMaterial = new Material(_bulletPrefab.GetMaterial()) { color = _paintColor };
+		}
 	}
 
 	public void Move(Vector3 direction)
@@ -43,6 +55,15 @@ public class PaintTank : MonoBehaviour
 	public void RotateTurretDownward()
 	{
 		_turretRotateDirection = -1;
+	}
+
+	public void Fire()
+	{
+		var bullet = Instantiate(_bulletPrefab);
+		bullet.Initialize()
+			.SetMaterial(_bulletMaterial)
+			.SetPosition(_muzzle.position)
+			.Fire(_muzzle.forward, _bulletSpeed);
 	}
 
 	void UpdateManually(float dt)
@@ -81,6 +102,14 @@ public class PaintTank : MonoBehaviour
 		Initialize();
 	}
 
+	void OnDestroy()
+	{
+		if (_bulletMaterial != null)
+		{
+			Destroy(_bulletMaterial);
+		}
+	}
+
 	void FixedUpdate()
 	{
 		if (Input.GetKey(KeyCode.W))
@@ -106,6 +135,10 @@ public class PaintTank : MonoBehaviour
 		if (Input.GetKey(KeyCode.DownArrow))
 		{
 			RotateTurretDownward();
+		}
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Fire();
 		}
 		UpdateManually(Time.deltaTime);
 	}

@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &124815197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 124815198}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &124815198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124815197}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071067, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 4.34, z: 0.05}
+  m_LocalScale: {x: 4.8247013, y: 4.824702, z: 4.824702}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 917430419}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,8 +748,13 @@ MonoBehaviour:
   _rotateSpeed: 64
   _maxAngularVelocity: 2
   _turretRotateSpeed: 30
+  _paintColor: {r: 1, g: 0, b: 0, a: 1}
+  _bulletSpeed: 10
   _rigidbody: {fileID: 874562402}
   _turret: {fileID: 917430419}
+  _muzzle: {fileID: 124815198}
+  _bulletPrefab: {fileID: 3820337909900286329, guid: 6959f0b949b06444a8941ccf5ec6a147,
+    type: 3}
 --- !u!54 &874562402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1208,7 +1244,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6f8701733f1900447b9c0fe33f54d01f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7940306847455457151, guid: 7d79b8ce1b311d4439d1a29048a34a71,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 124815198}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -9215042916403461548, guid: 7d79b8ce1b311d4439d1a29048a34a71,
         type: 3}
