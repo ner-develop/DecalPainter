@@ -47,7 +47,7 @@ public class MeshPaintTester : MonoBehaviour
 
 			// ペイント情報をセットアップ
 			var targetMeshTransform = _targetMesh.transform;
-			var size = 1;
+			var size = targetMeshTransform.lossyScale.x * 0.5f;
 			_decalPainter.SetPointer(
 				paintPositionOnObjectSpace: targetMeshTransform.InverseTransformPoint(decalPlaneTransform.position),
 				normal: targetMeshTransform.InverseTransformDirection(decalPlaneTransform.up),
