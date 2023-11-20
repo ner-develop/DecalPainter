@@ -37,7 +37,7 @@ Shader "UvMappingTest"
 				// UV座標をそのままClip空間として表示
 				const float x = input.texcoord.x * 2 - 1;
 				const float y = input.texcoord.y * 2 - 1;
-				output.positionCS = float4(x, y, 0, 1);
+				output.positionCS = float4(x, -y, 0, 1);
 
 				output.texcoord = input.texcoord;
 				return output;
