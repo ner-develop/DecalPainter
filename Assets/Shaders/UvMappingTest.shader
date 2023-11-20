@@ -39,8 +39,8 @@ Shader "UvMappingTest"
 				// プラットフォームごとによる上下の違いについて：https://docs.unity3d.com/2019.1/Documentation/Manual/SL-PlatformDifferences.html
 				const float x = input.texcoord.x * 2 - 1;
 				const float y = input.texcoord.y * 2 - 1;
-				const float shouldFlipY = _ProjectionParams.x < 0 ? -1 : 1;
-				output.positionCS = float4(x, shouldFlipY * y, 1, 1);
+				const float flippedY = _ProjectionParams.x;
+				output.positionCS = float4(x, flippedY * y, 1, 1);
 
 				output.texcoord = input.texcoord;
 				return output;
