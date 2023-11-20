@@ -78,10 +78,8 @@ Shader "DecalMapping"
 
 				// UV座標をそのままClip空間として表示
 				// プラットフォームごとによる上下の違いについて：https://docs.unity3d.com/2019.1/Documentation/Manual/SL-PlatformDifferences.html
-				const float x = input.texcoord.x * 2 - 1;
-				const float y = input.texcoord.y * 2 - 1;
-				const float flippedY = _ProjectionParams.x;
-				output.positionCS = float4(x, flippedY * y, 0, 1);
+				output.positionCS = float4(input.texcoord.xy * 2 - 1, 0, 1);
+				output.positionCS.y *= _ProjectionParams.x;
 
 				// 計算をObject空間で行うため、Object空間の法線と座標を渡す。
 				// World空間でもいいが、halfで精度が足りなくなりやすいので理由がなければObject空間で計算する。
