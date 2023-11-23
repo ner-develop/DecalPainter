@@ -9,4 +9,4 @@ https://github.com/ner-develop/DecalPainter/assets/144132227/2d1e6e7c-d53c-4e39-
 
 
 ## ■ 解説技術ブログ
-追加予定
+https://zenn.dev/nrdev/articles/1ae096ef6d9637
